@@ -18,11 +18,10 @@ export default {
 
 <style lang="scss" scoped>
   .layout{
-    border-radius: 10px;
     padding-top:40px;
     width:100%;
     height:100%;
-    box-shadow: 0 0px 5px #999;
+    box-shadow: 0 0px 5px gray;
   }
   #content{
     border-radius: 0 0 10px 10px;

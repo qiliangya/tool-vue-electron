@@ -2,6 +2,11 @@ html {
   width:100%;
   height:100%;
   box-sizing: border-box;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 html *, html *::before, html *::after {
   box-sizing: inherit;
@@ -26,6 +31,11 @@ color:#666666;
 font-family:Helvetica,Arial,sans-serif;
 font-size:12px;
 text-align:left;
+border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 select {
 font-size:12px;

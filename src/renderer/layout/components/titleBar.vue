@@ -53,7 +53,6 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding:0 10px;
-    border-radius: 10px 10px 0 0;
     -webkit-app-region:drag;
     line-height:40px;
     * {
