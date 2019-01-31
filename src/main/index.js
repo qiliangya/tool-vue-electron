@@ -1,6 +1,7 @@
 'use strict'
 
 import { app, BrowserWindow, Menu, ipcMain } from 'electron'
+import { createQrcode } from '../tools/qrcode'
 
 /**
  * Set `__static` path to static files in production
@@ -44,6 +45,12 @@ ipcMain.on('unMax', e => {
   mainWindow.unmaximize()
 })
 ipcMain.on('close', e => mainWindow.close())
+
+ipcMain.on('qrcode', (e, msg) => {
+  createQrcode(msg).then(data => {
+    e.sender.send('getQrcode', data)
+  })
+})
 
 app.on('ready', createWindow)
 

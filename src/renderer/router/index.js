@@ -19,6 +19,25 @@ export default new Router({
             title: '首页'
           },
           component: resolve => require(['../pages/index'], resolve)
+        },
+        {
+          path: '/tools',
+          name: 'tools',
+          redirect: '/qrcode',
+          meta: {
+            title: '工具'
+          },
+          children: [
+            {
+              path: '/qrcode',
+              name: 'qrcode',
+              meta: {
+                title: '二维码生成'
+              },
+              component: resolve => require(['../pages/qrcode/qrcode.vue'], resolve)
+            }
+          ],
+          component: resolve => require(['../pages/tools/tools.vue'], resolve)
         }
       ]
     },

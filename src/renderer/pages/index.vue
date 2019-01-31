@@ -1,14 +1,20 @@
 <template>
   <div class="index">
-    <div class="login-form">
-      <h3>请输入密码哦</h3>
-    </div>
+    <Row class="go">
+      <Col span="6" offset="6">
+        <Button type="info" ghost size="large" @click="goTools">点我进入</Button>
+      </Col>
+    </Row>
   </div>
 </template>
 
 <script>
 export default {
-
+  methods: {
+    goTools () {
+      this.$router.push('/tools')
+    }
+  }
 }
 </script>
 
@@ -18,10 +24,9 @@ export default {
     background:url('../../../static/bg.jpg') no-repeat center;
     background-size:cover;
     height:100%;
-    .login-form{
-      position: absolute;
-      width:300px;
-      height:500px;
+    overflow: hidden;
+    .go{
+      margin-top:60px;
     }
   }
 </style>
