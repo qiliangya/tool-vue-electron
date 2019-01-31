@@ -1,5 +1,5 @@
 {
-  "name": "vue-window",
+  "name": "once-tools",
   "version": "0.0.1",
   "author": "qiliangya <871259169@qq.com>",
   "description": "An electron-vue project",
@@ -22,7 +22,7 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "vue-window",
+    "productName": "一些工具",
     "appId": "com.qiliangya.www",
     "directories": {
       "output": "build"
