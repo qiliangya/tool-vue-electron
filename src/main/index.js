@@ -1,8 +1,7 @@
 'use strict'
 
 import { app, BrowserWindow, Menu, ipcMain } from 'electron'
-import { createQrcode } from '../tools/qrcode'
-import { saveImage } from '../tools/saveImage'
+import '../ipcProcess'
 
 /**
  * Set `__static` path to static files in production
@@ -46,20 +45,6 @@ ipcMain.on('unMax', e => {
   mainWindow.unmaximize()
 })
 ipcMain.on('close', e => mainWindow.close())
-
-// 生成二维码
-ipcMain.on('qrcode', (e, msg) => {
-  createQrcode(msg).then(data => {
-    e.sender.send('getQrcode', data)
-  })
-})
-
-// 保存临时图片
-ipcMain.on('saveImage', (e, base64Url) => {
-  saveImage(base64Url).then(data => {
-    e.sender.send('getImageStatus', data)
-  })
-})
 
 app.on('ready', createWindow)
 

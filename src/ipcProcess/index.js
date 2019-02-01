@@ -1,0 +1,2 @@
+import './saveImage'
+import './qrcode'

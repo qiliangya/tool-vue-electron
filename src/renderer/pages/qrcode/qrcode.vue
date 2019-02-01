@@ -1,13 +1,14 @@
 <template>
   <div class="qrcode">
-    <div class="qrcode-input">
-        二维码内容：
+    <div class="qrcode-input" v-if="isEnCode">
+        <Button type="info" @click="isEnCode = !isEnCode">我想解析</Button>
+        <h3>生成二维码：</h3>
         <Row>
           <Col span="10">
             <Input suffix="ios-barcode" placeholder="输入要生成的内容" size="large" clearable v-model="qrcodeData" />
           </Col>
           <Col span="3" offset="1">
-            <Button type="info" size="large" @click="startQrcode">生成</Button>
+            <Button type="info" size="large" @click="enQrcode">生成</Button>
           </Col>
         </Row>
         <Row v-if="imgData">
@@ -16,6 +17,22 @@
           </Col>
         </Row>
         <right-menu :showMenu="showRightMenu" :menuList="menuList" :point="point"/>
+    </div>
+    <div class="qrcode-upload" v-else style="margin-top:50px;">
+      <Button type="info" @click="isEnCode = !isEnCode">我想生成</Button>
+      <h3>解析二维码</h3>
+      <p v-if="qrcodeText">您解析的二维码为: <span>{{qrcodeText}}</span></p>
+      <Upload
+          multiple
+          type="drag"
+          :on-success="uploadImg"
+          name="Filedata"
+          action="https://upload.api.cli.im/upload.php?kid=cliim">
+          <div style="padding: 20px 0">
+              <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
+              <p>请上传你要解析的二维码</p>
+          </div>
+      </Upload>
     </div>
   </div>
 </template>
@@ -26,7 +43,9 @@ import rightMenu from '../../components/RightMenu/RightMenu'
 export default {
   data () {
     return {
+      isEnCode: true,
       qrcodeData: '',
+      qrcodeText: '',
       imgData: '',
       showRightMenu: false,
       point: [],
@@ -50,8 +69,14 @@ export default {
     rightMenu
   },
   methods: {
-    startQrcode () {
-      ipcRenderer.send('qrcode', this.qrcodeData)
+    uploadImg (response, file, fileList) {
+      this.deQrcode(response.data.path)
+    },
+    enQrcode () {
+      ipcRenderer.send('enQrcode', this.qrcodeData)
+    },
+    deQrcode (imgPath) {
+      ipcRenderer.send('deQrcode', imgPath)
     },
     onRightMenu (e) {
       this.showRightMenu = true
@@ -60,8 +85,11 @@ export default {
     }
   },
   created () {
-    ipcRenderer.on('getQrcode', (e, data) => {
+    ipcRenderer.on('getEnQrcode', (e, data) => {
       this.imgData = data
+    })
+    ipcRenderer.on('getDeQrcode', (e, data) => {
+      this.qrcodeText = JSON.parse(data).info.data[0]
     })
     ipcRenderer.on('getImageStatus', (e, data) => {
       const image = nativeImage.createFromPath(data)
@@ -82,7 +110,6 @@ export default {
     .qrcode-input{
       height:60px;
       margin-top:50px;
-      font-size:16px;
     }
     img{
       width:200px;

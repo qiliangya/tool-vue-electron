@@ -32,7 +32,7 @@ export default new Router({
               path: '/qrcode',
               name: 'qrcode',
               meta: {
-                title: '二维码生成'
+                title: '二维码'
               },
               component: resolve => require(['../pages/qrcode/qrcode.vue'], resolve)
             }

@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const SAVE_IMAGE_URL = path.resolve(process.env.NODE_ENV === 'development' ? '../static' : './', 'saveImages')
+const SAVE_IMAGE_URL = path.resolve(process.env.NODE_ENV === 'development' ? './static/images' : './', 'saveImages')
 
 const saveImage = function (url) {
   return new Promise((resolve, reject) => {

@@ -3,7 +3,7 @@
     <Menu mode="horizontal" theme="light" active-name="1">
         <MenuItem name="1">
           <Icon type="ios-barcode" />
-          二维码生成
+          二维码
         </MenuItem>
         <!-- <MenuItem name="2">
             <Icon type="ios-people" />
