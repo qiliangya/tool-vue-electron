@@ -2,6 +2,7 @@
 
 import { app, BrowserWindow, Menu, ipcMain } from 'electron'
 import '../ipcProcess'
+import '../db'
 
 /**
  * Set `__static` path to static files in production

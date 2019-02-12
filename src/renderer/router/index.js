@@ -35,6 +35,14 @@ export default new Router({
                 title: '二维码'
               },
               component: resolve => require(['../pages/qrcode/qrcode.vue'], resolve)
+            },
+            {
+              path: '/cssTool',
+              name: 'cssTool',
+              meta: {
+                title: 'css工具'
+              },
+              component: resolve => require(['../pages/cssTool/cssTool.vue'], resolve)
             }
           ],
           component: resolve => require(['../pages/tools/tools.vue'], resolve)

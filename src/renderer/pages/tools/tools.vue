@@ -1,9 +1,13 @@
 <template>
   <div class="tools">
-    <Menu mode="horizontal" theme="light" active-name="1">
-        <MenuItem name="1">
+    <Menu mode="horizontal" theme="light" :active-name="$route.name">
+        <MenuItem name="qrcode" to="qrcode">
           <Icon type="ios-barcode" />
           二维码
+        </MenuItem>
+        <MenuItem name="cssTool" to="cssTool">
+          <Icon type="ios-bowtie-outline" />
+          常用css
         </MenuItem>
         <!-- <MenuItem name="2">
             <Icon type="ios-people" />
