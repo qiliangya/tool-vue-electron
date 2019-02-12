@@ -43,6 +43,14 @@ export default new Router({
                 title: 'css工具'
               },
               component: resolve => require(['../pages/cssTool/cssTool.vue'], resolve)
+            },
+            {
+              path: '/qq',
+              name: 'qq',
+              meta: {
+                title: 'qq相关'
+              },
+              component: resolve => require(['../pages/qq/qq.vue'], resolve)
             }
           ],
           component: resolve => require(['../pages/tools/tools.vue'], resolve)

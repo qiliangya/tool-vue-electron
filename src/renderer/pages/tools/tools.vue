@@ -9,6 +9,10 @@
           <Icon type="ios-bowtie-outline" />
           常用css
         </MenuItem>
+        <MenuItem name="qq" to="qq">
+          <Icon type="ios-paper-plane" />
+          QQ相关
+        </MenuItem>
         <!-- <MenuItem name="2">
             <Icon type="ios-people" />
             用户管理
