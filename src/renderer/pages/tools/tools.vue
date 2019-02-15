@@ -5,14 +5,19 @@
           <Icon type="ios-barcode" />
           二维码
         </MenuItem>
-        <MenuItem name="cssTool" to="cssTool">
+        <MenuItem name="recordText" to="recordText">
           <Icon type="ios-bowtie-outline" />
-          常用css
+          记事本
         </MenuItem>
-        <MenuItem name="qq" to="qq">
+        
+        <MenuItem name="chartRoom" to="chartRoom">
+          <Icon type="ios-at" />
+          聊天室
+        </MenuItem>
+        <!-- <MenuItem name="qq" to="qq">
           <Icon type="ios-paper-plane" />
           QQ相关
-        </MenuItem>
+        </MenuItem> -->
         <!-- <MenuItem name="2">
             <Icon type="ios-people" />
             用户管理
@@ -37,7 +42,9 @@
             综合设置
         </MenuItem> -->
     </Menu>
-    <router-view/>
+    <div class="content-box">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -48,5 +55,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.tools{
+  height:100%;
+}
+.content-box{
+  height: calc(100% - 60px);
+}
 </style>

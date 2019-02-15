@@ -3,7 +3,7 @@
     <Button type="primary" size="large" @click="add" style="margin-bottom:20px;">添加</Button>
     <div class="css-no-list" v-if="dataList.length === 0">
       <div style="display:flex;">
-        <h3>没有任何css代码, 请添加</h3>
+        <h3>没有任何记录, 请添加~</h3>
       </div>
     </div>
     <div class="css-list" v-else>
@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import { cssDB } from '../../../db'
-import addModal from './children/cssModal'
+import { ipcRenderer } from 'electron'
+import addModal from './children/recordTextModal'
 export default {
   data () {
     return {
@@ -64,12 +64,8 @@ export default {
         closable: true,
         content: '确定要删除吗',
         onOk: () => {
-          cssDB.remove({ _id: item._id }, {}, err => {
-            if (err) throw new Error(err)
-            this.$Message.success('删除成功')
-            this.$Modal.remove()
-            this.dataList.splice(index, 1)
-          })
+          this.dataList.splice(index, 1)
+          ipcRenderer.send('removeData', { name: 'cssDB', data: { _id: item._id } })
         }
       })
     },
@@ -86,9 +82,15 @@ export default {
     }
   },
   created () {
-    cssDB.find({}, (err, doc) => {
-      if (err) throw new Error(err)
-      this.dataList = doc
+    ipcRenderer.send('findData', { name: 'cssDB', data: {} })
+
+    ipcRenderer.on('getFindData', (e, data) => {
+      this.dataList = data
+    })
+
+    ipcRenderer.on('getRemoveData', (e, data) => {
+      this.$Message.success('删除成功')
+      this.$Modal.remove()
     })
   }
 }

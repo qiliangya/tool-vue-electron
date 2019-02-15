@@ -37,12 +37,20 @@ export default new Router({
               component: resolve => require(['../pages/qrcode/qrcode.vue'], resolve)
             },
             {
-              path: '/cssTool',
-              name: 'cssTool',
+              path: '/recordText',
+              name: 'recordText',
               meta: {
-                title: 'css工具'
+                title: '记事本'
               },
-              component: resolve => require(['../pages/cssTool/cssTool.vue'], resolve)
+              component: resolve => require(['../pages/recordText/recordText.vue'], resolve)
+            },
+            {
+              path: '/chartRoom',
+              name: 'chartRoom',
+              meta: {
+                title: '聊天室'
+              },
+              component: resolve => require(['../pages/chartRoom/chartRoom.vue'], resolve)
             },
             {
               path: '/qq',

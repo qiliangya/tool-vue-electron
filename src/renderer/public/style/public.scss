@@ -1,5 +1,28 @@
+.main-color{
+  background-color: #F90;
+}
 .main-bg{
   background: #536976;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to top, #292E49, #536976);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to top, #292E49, #536976); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.main-scroll-bar{
+  &::-webkit-scrollbar{
+    width:10px;
+    height:1px;
+  }
+  &::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    @extend .main-bg;
+    // background-color: #F90;
+    // background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+  }
+  &::-webkit-scrollbar-track{
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #EDEDED;
+  }
+}
+textarea{
+  @extend .main-scroll-bar
 }

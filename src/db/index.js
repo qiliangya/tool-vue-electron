@@ -1,9 +1,10 @@
+const { app } = require('electron')
 const Datastore = require('nedb')
 const path = require('path')
-
+const userDataPath = app.getPath('userData')
 function initDB (pathName) {
   return new Datastore({
-    filename: path.resolve(__dirname, './path/' + pathName + '.db'),
+    filename: path.join(userDataPath, pathName + '.db'),
     autoload: true
   })
 }

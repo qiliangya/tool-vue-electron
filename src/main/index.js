@@ -25,11 +25,11 @@ function createWindow () {
    */
   mainWindow = new BrowserWindow({
     webPreferences: {webSecurity: false},
-    height: 563,
+    height: 850,
     useContentSize: true,
     transparent: true,
     frame: false, // 去掉顶部标题栏
-    width: 1000
+    width: 1300
   })
 
   mainWindow.loadURL(winURL)

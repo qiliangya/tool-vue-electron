@@ -4,13 +4,13 @@
     @on-cancel="changeModal"
     @on-ok="success"
     loading 
-    :title="addModal === 1 ? '添加css' : '修改css'"
+    :title="addModal === 1 ? '添加' : '修改'"
     :ok-text="addModal === 1 ? '添加' : '修改'"
   >
     <Form v-if="cssData">
       <Row>
         <Col span="6">
-          <h3>css名字</h3>
+          <h3>标题</h3>
         </Col>
         <Col span="12">
           <FormItem>
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { cssDB } from '../../../../db'
+import { ipcRenderer } from 'electron'
 export default {
   props: {
     addModal: {
@@ -69,20 +69,22 @@ export default {
       this.addModal === 1 ? this.add() : this.update()
     },
     add () {
-      cssDB.insert(Object.assign(this.cssData, { date: new Date() }), (err, newData) => {
-        if (err) throw new Error(err)
-        this.$Message.success('添加成功!')
-        this.changeModal(newData)
-        this.reset()
-      })
+      ipcRenderer.send('insertData', { name: 'cssDB', data: Object.assign(this.cssData, { date: new Date() }) })
+      // cssDB.insert(Object.assign(this.cssData, { date: new Date() }), (err, newData) => {
+      //   if (err) throw new Error(err)
+      //   this.$Message.success('添加成功!')
+      //   this.changeModal(newData)
+      //   this.reset()
+      // })
     },
     update () {
-      cssDB.update({ _id: this.cssTempData._id }, this.cssData, {}, (err, num) => {
-        if (err) throw new Error(err)
-        this.$Message.success('修改成功!')
-        this.changeModal(this.cssData)
-        this.reset()
-      })
+      ipcRenderer.send('updateData', { name: 'cssDB', data: { oldData: { _id: this.cssTempData._id }, newData: this.cssData } })
+      // cssDB.update({ _id: this.cssTempData._id }, this.cssData, {}, (err, num) => {
+      //   if (err) throw new Error(err)
+      //   this.$Message.success('修改成功!')
+      //   this.changeModal(this.cssData)
+      //   this.reset()
+      // })
     },
     changeModal (newData) {
       this.$emit('changeModal', newData)
@@ -99,6 +101,18 @@ export default {
     if (this.cssTempData._id) {
       this.cssData = this.cssTempData
     }
+
+    ipcRenderer.on('getInsertData', (e, data) => {
+      this.$Message.success('添加成功!')
+      this.changeModal(data)
+      this.reset()
+    })
+
+    ipcRenderer.on('getUpdateData', (e, data) => {
+      this.$Message.success('修改成功!')
+      this.changeModal(this.cssData)
+      this.reset()
+    })
   }
 }
 </script>
